@@ -1,0 +1,161 @@
+.header {
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-bar {
+  height: 70px;
+  position: relative;
+}
+.search-bar input {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: var(--body-color);
+  padding: 0 35px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a4b9' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-search'%3e%3ccircle cx='11' cy='11' r='8'/%3e%3cpath d='M21 21l-4.35-4.35'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: 0 50%;
+  font-family: var(--body-font);
+  font-weight: 600;
+  font-size: 14px;
+}
+.search-bar input::placeholder {
+  color: var(--main-light-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 30px;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--unselected-mail);
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+.inbox-calendar-checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  z-index: 3;
+  cursor: pointer;
+}
+  
+.toggle-page {
+  overflow: hidden;
+  z-index: 2;
+}
+  
+.inbox-calendar {
+  position: relative;
+  width: 220px;
+  border-radius: 20px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.inbox-calendar {
+  margin-right: 200px;
+}
+
+.toggle-page:before,
+.toggle-page:after,
+.toggle-page span {
+  position: absolute;
+  top: 4px;
+  width: 100px;
+  height: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 9px 4px;
+  border-radius: 20px;
+  transition: 0.3s ease all;
+}
+
+.toggle-page:before {
+  content: "";
+  left: 4px;
+  background-color: var(--button-color);
+}
+
+.toggle-page span {
+  color: var(--theme-bg-color);
+  z-index: 1;
+  left: 6px;
+}
+
+.toggle-page:after {
+  content: "Calendar";
+  right: 4px;
+  color: var(--main-light-color);
+}
+
+.inbox-calendar-checkbox:checked + .toggle-page span {
+  color: var(--main-light-color);
+}
+
+.inbox-calendar-checkbox:checked + .toggle-page:before {
+  left: 109px;
+}
+
+.inbox-calendar-checkbox:checked + .toggle-page:after {
+  color: var(--theme-bg-color);
+}
+
+
+
+
+.color-menu {
+  flex-shrink: 0;
+}
+
+.color-menu {
+  flex-shrink: 0;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+}
+.color-menu svg {
+  position: absolute;
+  z-index: 8;
+  width: 17px;
+  top: 7px;
+  right: 8px;
+  fill: #fff;
+  pointer-events: none;
+}
+
+.colorpicker {
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 55px;
+  top: -8px;
+  right: -8px;
+  position: absolute;
+  cursor: pointer;
+}

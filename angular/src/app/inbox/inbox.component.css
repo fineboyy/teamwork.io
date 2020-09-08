@@ -1,0 +1,88 @@
+.msg {
+    padding: 30px;
+    background-color: var(--unselected-mail);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    transition: 0.4s ease;
+  }
+  .msg-title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .msg-date {
+    font-size: 11px;
+    color: var(--main-light-color);
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  
+  .selected-bg {
+    background-color: var(--theme-bg-color);
+  }
+  
+  .msg-department {
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    background-color: var(--theme-bg-color);
+    border-left: 4px solid #b36dfb;
+  }
+  .msg-department svg {
+    width: 12px;
+  }
+  
+  .inbox {
+    max-height: 90vh;
+    overflow: auto;
+  }
+  .inbox-container {
+    border-right: 1px solid var(--border-color);
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    flex-shrink: 0;
+}
+
+
+.mail-members {
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+  }
+  
+.add-task {
+    position: sticky;
+    flex-shrink: 0;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    background-color: var(--theme-bg-color);
+    animation: slideUp 0.45s 0.4s both;
+}
+.add-button {
+    position: sticky;
+    bottom: 10px;
+    background-color: var(--button-color);
+    border: 0;
+    margin: auto;
+    padding: 10px 30px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    flex-shrink: 0;
+    z-index: 1;
+    cursor: pointer;
+}
