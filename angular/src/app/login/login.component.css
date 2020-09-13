@@ -1,0 +1,31 @@
+hr{
+    width: 30%;
+    color: var(--body-bg-color);
+}
+
+.connect { 
+    display: flex;
+    align-items: center;
+}
+
+
+
+ul{
+    list-style: none;
+    margin-bottom:40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+ul li{
+    display: inline-block;
+    margin-right: 30px;
+    cursor: pointer;
+    color: var(--button-color);
+}
+ul li:hover{opacity: 0.6}
+
+ul a {
+    text-decoration: none;
+    color: var(--button-color)
+}

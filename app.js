@@ -1,8 +1,12 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
+const passport = require('passport');
+require('./mvc/models/db');
 
 var indexRouter = require('./mvc/routes/index');
 var usersRouter = require('./mvc/routes/users');
@@ -18,6 +22,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize())
+
+app.use('/', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

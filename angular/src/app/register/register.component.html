@@ -1,0 +1,30 @@
+<div class="form-container back rotated">
+    <div class="right-pane">
+        <i class="far fa-check-circle profile-icon"></i>
+        <h1>TASK MANAGER</h1>
+        <p>Quote of the Day:</p>
+        <p><i>"If you want to go fast, go alone. If you want to go far, go together."</i></p>
+        <a (click)="toggleLogin()">Log In</a>
+    </div>
+    <div class="form-pane">
+        <form class="access-form" action="/users/login" method="post" (submit)="formSubmit()" autocomplete="off">
+            <div *ngIf="formError" class="form-error">
+                {{ formError }}
+            </div>
+            <h1>SIGN UP</h1>
+                <input type="text" name="first_name" placeholder="First Name" [(ngModel)]="credentials.first_name">
+                <input type="text" name="last_name" placeholder="Last Name" [(ngModel)]="credentials.last_name">
+                <input type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email">
+                <input type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+                <input type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password_confirm">
+
+            <div>
+                <span>
+                    <input type="checkbox">
+                    <span>I agree to the Terms and Conditions</span>
+                </span>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</div>

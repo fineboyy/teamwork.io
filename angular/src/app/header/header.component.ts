@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service'
+import { LocalStorageService } from '../local-storage.service'
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private api: ApiService,
+    private storage: LocalStorageService,
+  ) { }
 
   ngOnInit(): void {
+    let userid = this.storage.getParsedToken()._id
+    this.api.getUserData(userid)
   }
 
+  public toggleCalendar() {
+    this.api.toggleCalendar()
+  }
 }

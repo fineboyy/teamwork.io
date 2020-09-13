@@ -1,6 +1,5 @@
 $('.mail-choice').change(function() {
     if($(this).is(":checked")) {
-      console.log("jquery is working")
         $(this).parent().addClass('selected-bg');
   } else {
     $(this).parent().removeClass('selected-bg');
