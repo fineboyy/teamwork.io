@@ -96,7 +96,8 @@ export class MailDetailComponent implements OnInit {
       creatorId: this.storage.getParsedToken()._id,
       assignedTo: 'No one',
       title: this.taskArr[num],
-      content: `Yeah I know you would love to see a lot of text here, but I just cannot give you that. What I can give you right now is what I am giving you. If you like it, that's great because I like it too. But if you don't, well, you can go burn the sea!`,
+      content: 'This is some content',
+      // content: `Yeah I know you would love to see a lot of text here, but I just cannot give you that. What I can give you right now is what I am giving you. If you like it, that's great because I like it too. But if you don't, well, you can go burn the sea!`,
       date: '7 Jun, 2020'
     }
 

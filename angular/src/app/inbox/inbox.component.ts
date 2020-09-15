@@ -19,11 +19,13 @@ export class InboxComponent implements OnInit {
   ngOnInit(): void {
 
     this.events.getUserDataEvent.subscribe((user: any) => {
+      let arr = []
       for (let i of user.tasks) {
         console.log(i.isCompleted)
         i.fakeId = this.removeLeadingNumbers(i._id)
-        this.tasks.push(i)
+        arr.push(i)
       }
+      this.tasks = arr.reverse()
     })
 
     this.events.addTaskEvent.subscribe((val) => {

@@ -2,22 +2,45 @@ body {
   margin: 0;
 }
 
+.container {
+  width: 100%;
+  /* max-width: 100%; */
+  margin: 0;
+}
 
+/* USER PROFILE AREA */
+/* ======================================= */
+
+.main-container {
+  flex-basis: 420px;
+  display: flex;
+}
+
+.side-wrapper:nth-of-type(3) {
+  max-height: 21vh;
+  overflow: auto;
+  padding-top: 15px;
+}
+
+
+
+
+
+
+
+
+/* MAIN AREA */
+/* ============================================== */
+
+/* HEADER */
+.activated {
+  background-color: var(--theme-bg-color);
+}
+
+
+/* INBOX */
 .inbox {
   max-height: 100vh;
-  overflow: auto;
-}
-
-.shorter {
-  max-height: 90vh;
-}
-
-.mail-detail {
-  max-height: 90vh;
-  height: 90vh;
-}
-
-.inbox {
   overflow: hidden;
 }
 
@@ -27,20 +50,32 @@ body {
   overflow: auto;
 }
 
-/* .main-container:nth-of-type(1) {
-  display: none;
-} */
-
-.side-wrapper:nth-of-type(3) {
-  max-height: 21vh;
-  overflow: auto;
-  padding-top: 15px;
+.shorter {
+  max-height: 90vh;
 }
+
+
+/* MAIL DETAIL */
+.mail-detail {
+  max-height: 90vh;
+  height: 90vh;
+  flex-grow: 1 !important;
+
+  /* flex-shrink: 3; */
+}
+
+/* ================ */
+
+
+/* CALENDAR */
 
 .calendar-container {
   width: 95%;
-  height: 100%;
+  height: 95%;
 }
+
+
+/* ================ */
 
 /* .msg {
   background-color: var(--unselected-mail);
@@ -50,20 +85,18 @@ body {
   background-color: var(--theme-bg-color);
 } */
 
-.activated {
-  background-color: var(--theme-bg-color);
-}
 
 
 
 
 
-
+/* ================================================== */
 
 
 /* For custom scroll bars */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 .custom-scroll::-webkit-scrollbar-track { background: #F8F9FC; }
 .custom-scroll::-webkit-scrollbar-thumb { 
