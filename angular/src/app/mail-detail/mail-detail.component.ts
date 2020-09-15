@@ -22,14 +22,31 @@ export class MailDetailComponent implements OnInit {
   ngOnInit(): void {
     this.events.updateOpenTaskEvent.subscribe((task: any) => {
       if (task.title) {
-        this.show = false
+        this.show_form = false
 
         this.title = task.title
-        this.date = task.date
+        this.date_created = task.date_created
+        this.date_completed = task.date_completed
         this.assignedTo = task.assignedTo
         this.content = task.content
         this.creatorName = task.creatorName
         this.creatorId = task.creatorId
+        if(task.departments.length) {
+          this.department = task.departments[0].name
+
+          if(this.department === 'Marketing') {
+            this.tagClass = 'marketing'
+          }
+          if(this.department === 'Design') {
+            this.tagClass = 'design'
+          }
+          if(this.department === 'Development') {
+            this.tagClass = 'development'
+          }
+          if(this.department === 'Management') {
+            this.tagClass = 'management'
+          }
+        }
 
         this.isCompleted = task.isCompleted
         this.taskId = task._id
@@ -46,19 +63,23 @@ export class MailDetailComponent implements OnInit {
   
     this.events.showFormEvent.subscribe((val) => {
       if(val === 'show') {
-        this.show = true
+        this.show_form = true
         this.title = ''
       }
     })
   
     this.events.resolveTaskEvent.subscribe((resolved_task) => {
       this.isCompleted = resolved_task.isCompleted
-      console.log({'Mail detail isCompleted': this.isCompleted})
+      this.date_completed = resolved_task.date_completed
     })
   
+    this.events.deleteTaskEvent.subscribe((deleted_task) => {
+      this.title = ''
+      this.show_form = true
+    })
   }
 
-  public show: boolean = false
+  public show_form: boolean = false
   public showForm() {
     this.api.showForm()
   }
@@ -66,39 +87,43 @@ export class MailDetailComponent implements OnInit {
 
   public taskId = ''
   public title = ''
-  public date = ''
+  public date_created = ''
+  public date_completed = ''
   public assignedTo = ''
   public creatorName = ''
   public creatorId = ''
   public content = ''
   public isCompleted: boolean
+  public department: string = ''
+  public tagClass: string = ''
 
-  public taskArr = [
-    'Create Adwords campain',
-    'Write an article about design',
-    'Prepare slides for presentation',
-    'Visit clients for product evaluation',
-    'Board General Meeting',
-    'Finish building the GraphQL API',
-    'Contact HR',
-    'Discuss the viability of new strategy',
-    'Send newsletter to subscribers',
-    'Sales reports from last month'
+  //Variables for a newly created task
+  public newTaskTitle: string = ''
+  public newTaskContent: string = ''
 
+
+  
+
+  private departments = [
+    "Marketing",
+    "Design",
+    "Development",
+    "Management",
   ]
 
   public addTask = function () {
-    let num = Math.floor(Math.random() * this.taskArr.length)
-    console.log(num)
+    console.log(this.newTaskTitle)
+    console.log(this.newTaskContent)
 
     let taskBody = {
       creatorName: this.storage.getParsedToken().name,
       creatorId: this.storage.getParsedToken()._id,
       assignedTo: 'No one',
-      title: this.taskArr[num],
-      content: 'This is some content',
+      title: this.newTaskTitle || 'No Title',
+      content: this.newTaskContent || 'No Content',
       // content: `Yeah I know you would love to see a lot of text here, but I just cannot give you that. What I can give you right now is what I am giving you. If you like it, that's great because I like it too. But if you don't, well, you can go burn the sea!`,
-      date: '7 Jun, 2020'
+      date_created: this.api.getTaskDate(),
+      department: this.departments[Math.floor(Math.random() * 4)]
     }
 
     let requestObject = {
@@ -111,6 +136,8 @@ export class MailDetailComponent implements OnInit {
 
     this.api.makeRequest(requestObject).then((val) => {
       if (val.message === 'Task Created') {
+        this.newTaskTitle = '',
+        this.newTaskContent = ''
         this.events.addTaskEvent.emit(val)
       }
     })
@@ -120,4 +147,18 @@ export class MailDetailComponent implements OnInit {
     this.api.resolveTask(id)
   }
 
+  public deleteTask(id) {
+    let requestObject = {
+      method: 'POST',
+      location: `users/delete-task/${id}`,
+      authorize: true
+    }
+
+    this.api.makeRequest(requestObject).then((deleted_task) => {
+      if(deleted_task.title) {
+        console.log(deleted_task)
+        this.events.deleteTaskEvent.emit(deleted_task)
+      }
+    })
+  }
 }

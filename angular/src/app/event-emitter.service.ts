@@ -10,6 +10,7 @@ export class EventEmitterService {
   toggleCalendarEvent: EventEmitter<any> = new EventEmitter();
   showFormEvent: EventEmitter<any> = new EventEmitter();
   resolveTaskEvent: EventEmitter<any> = new EventEmitter();
+  deleteTaskEvent: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 }

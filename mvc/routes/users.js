@@ -15,6 +15,7 @@ router.get('/get-user-data/:id', middleware.authorize, usersCtrl.getUserData)
 //POST REQUEST
 router.post('/create-task', middleware.authorize, usersCtrl.createTask)
 router.post('/resolve-task/:id', middleware.authorize, usersCtrl.resolveTask)
+router.post('/delete-task/:id', middleware.authorize, usersCtrl.deleteTask)
 
 
 module.exports = router;

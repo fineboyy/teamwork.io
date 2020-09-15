@@ -1,8 +1,7 @@
-
 <!-- A welcome screen for user to create task -->
 <!-- ====================================================================================================== -->
 
-<div *ngIf='!title && !show' class="mail-detail custom-scroll">
+<div *ngIf='!title && !show_form' class="mail-detail custom-scroll">
 
   <div class="central">
     <h5>Click here to create a new task!</h5>
@@ -18,7 +17,7 @@
 <!-- Includes form where user can add task -->
 <!-- ============================================================================================================= -->
 
-<div *ngIf="!title && show" class="mail-detail custom-scroll">
+<div *ngIf="!title && show_form" class="mail-detail custom-scroll">
   <div class="mail-detail-header">
     <div class="mail-detail-profile">
       <!-- <img src="https://assets.codepen.io/3364143/Screen+Shot+2020-08-01+at+12.24.16.png" alt="" -->
@@ -57,27 +56,34 @@
   </div>
   <div class="mail-contents">
     <div class="mail-contents-subject">
-      <input type="checkbox" name="msg" id="mail20" class="mail-choice">
+      <input type="checkbox" name="msg" id="mail20" class="mail-choice" unchecked>
       <label for="mail20"></label>
-      <!-- <div class="mail-contents-title">Write an article about design</div> -->
-      <div class="mail-contents-title">
-        <!-- {{ title  }} -->
-        Create A New Task
+      <div class="mail-contents-title editable" data-text="Your title goes here..." contenteditable="true"
+        name='newTaskTitle' ngDefaultControl [(ngModel)]='newTaskTitle'
+        (input)="newTaskTitle = $event.target.innerText">
       </div>
     </div>
     <div class="mail">
       <div class="mail-time">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="feather feather-clock">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" /></svg>
-        <!-- {{ date }} -->
+          just now -->
       </div>
-      <div class="mail-inside">
-        <!-- {{ content }} -->
-        Your opened tasks appear here. Click on one of your assigned tasks to open it up in this box. You can also send
-        comments and attach files to a task. Just give it a try.
+      <!-- <span class="department-tags">
+        <i class="fas fa-tags">
+          <span class="marketing">Marketing</span>
+          <span class="marketing">Marketing</span>
+          <span class="marketing">Marketing</span>
+          <span class="marketing">Marketing</span>
+        </i>
+      </span> -->
+      <div class="mail-inside editable" contenteditable="true" name='newTaskContent'
+        data-text="A short description about the task..." ngDefaultControl [(ngModel)]='newTaskContent'
+        (input)="newTaskContent = $event.target.innerText">
+
       </div>
       <!-- <div class="mail-assign">
         <div class="assignee">
@@ -92,13 +98,13 @@
           <strong>Okla Nowak </strong> created task.
           <span class="assign-date">18 Feb, 2019</span>
         </div>
-      </div>
-      <div class="mail-checklist">
+      </div> -->
+      <!-- <div class="mail-checklist">
         <input type="checkbox" name="msg" id="mail30" class="mail-choice" checked>
         <label for="mail30">Natalie completed this task.</label>
         <div class="mail-checklist-date">19 May, 2020</div>
-      </div>
-      <div class="mail-doc">
+      </div> -->
+      <!-- <div class="mail-doc">
         <div class="mail-doc-wrapper">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
@@ -134,7 +140,7 @@
 <!-- Shows the details of a task -->
 <!-- ============================================================================================================== -->
 
-<div *ngIf="title && !show" class="mail-detail custom-scroll">
+<div *ngIf="title && !show_form" class="mail-detail custom-scroll">
   <div class="mail-detail-header">
     <div class="mail-detail-profile">
       <img src="../../assets/images/profile-images/m15.jpg" alt="" class="members inbox-detail" />
@@ -143,7 +149,7 @@
     <div class="mail-icons">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="feather feather-trash-2">
+        class="feather feather-trash-2" (click)="deleteTask(taskId)">
         <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
       </svg>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -170,7 +176,8 @@
   </div>
   <div class="mail-contents">
     <div class="mail-contents-subject">
-      <input type="checkbox" name="msg" id="mail20" class="mail-choice" [(ngModel)]="isCompleted" [attr.checked]=" isCompleted == true ? 'checked' : null " (change)="resolveTask(taskId)">
+      <input type="checkbox" name="msg" id="mail20" class="mail-choice" [(ngModel)]="isCompleted"
+        [attr.checked]=" isCompleted == true ? 'checked' : null " (change)="resolveTask(taskId)">
       <label for="mail20"></label>
       <div class="mail-contents-title">{{ title  }}</div>
     </div>
@@ -181,8 +188,13 @@
           class="feather feather-clock">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" /></svg>
-        {{ date }}
+        {{ date_created }}
       </div>
+      <span class="department-tags" *ngIf="department">
+        <i class="fas fa-tag">
+          <span class="task-tag {{ tagClass }}"> {{ department }} </span>
+        </i>
+      </span>
       <div class="mail-inside">{{ content }}</div>
       <div class="mail-assign">
         <div class="assignee">
@@ -195,13 +207,14 @@
         </div>
         <div class="assignee">
           <strong>{{ creatorName }} </strong> created task.
-          <span class="assign-date">18 Feb, 2019</span>
+          <span class="assign-date">{{ date_created }}</span>
         </div>
       </div>
-      <div class="mail-checklist">
-        <input type="checkbox" name="msg" id="mail30" class="mail-choice" [(ngModel)]="isCompleted" [attr.checked]=" isCompleted == true ? 'checked' : null " (change)="resolveTask(taskId)">
-        <label for="mail30">{{ assignedTo }} completed this task.</label>
-        <div class="mail-checklist-date">19 May, 2020</div>
+      <div class="mail-checklist" *ngIf="isCompleted">
+        <input type="checkbox" name="msg" id="mail30" class="mail-choice" [(ngModel)]="isCompleted"
+          [attr.checked]=" isCompleted == true ? 'checked' : null " (change)="resolveTask(taskId)">
+        <label for="mail30"> You completed this task.</label>
+        <div class="mail-checklist-date">{{ date_completed }}</div>
       </div>
       <div class="mail-doc">
         <div class="mail-doc-wrapper">

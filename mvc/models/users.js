@@ -2,14 +2,20 @@ const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto');
 
+const departmentSchema = new mongoose.Schema({
+    name: String,
+})
+
 const taskSchema = new mongoose.Schema({
     creatorName: String,
     creatorId: String,
     assignedTo: String,
     title: String,
     content: String,
-    date: String,
+    date_created: String,
+    date_completed: String,
     isCompleted: Boolean,
+    departments: [departmentSchema],
 
 })
 
@@ -23,7 +29,7 @@ const userSchema = new mongoose.Schema({
     salt: String,
     password: String,
     email: String,
-    tasks: [taskSchema]
+    tasks: [taskSchema],
 })
 
 userSchema.methods.setPassword = function(password){
@@ -46,3 +52,4 @@ userSchema.methods.getJwt = function () {
 
 mongoose.model('User', userSchema)
 mongoose.model('Task', taskSchema)
+mongoose.model('Department', departmentSchema)

@@ -73,15 +73,67 @@ export class ApiService {
     }
 
     this.makeRequest(requestObject).then((user) => {
-      this.events.getUserDataEvent.emit(user)
+      if(user) {
+        this.events.getUserDataEvent.emit(user)
+      } else {
+        alert('There was an error. Please try again later')
+      }
     })
+  }
+
+  public getTaskDate() {
+
+    let monthsArr = [
+      "Jan.",
+      "Feb.",
+      "Mar.",
+      "Apr.",
+      "May.",
+      "Jun.",
+      "Jul.",
+      "Aug.",
+      "Sept.",
+      "Oct.",
+      "Nov.",
+      "Dec."
+    ]
+
+
+    let daysArr = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ]
+
+    let d = new Date()
+  
+    let weekday = daysArr[d.getDay()]
+    let day = d.getDate()
+    let month = monthsArr[d.getMonth()]
+    let year = d.getFullYear()
+
+    let hours = d.getHours()
+    let minutes = d.getMinutes().toString()
+    if(minutes.length == 1) {
+      minutes = "0" + minutes
+    }
+
+    let dateString = `${weekday}, ${day} ${month} ${year} at ${hours}:${minutes}`
+    return dateString
   }
 
   public resolveTask(id) {
     let requestObj = {
       method: 'POST',
       location: `users/resolve-task/${id}`,
-      authorize: true
+      authorize: true,
+      body: {
+        date_completed: this.getTaskDate()
+      }
     }
 
     this.makeRequest(requestObj).then((completed_task) => {

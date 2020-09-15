@@ -20,17 +20,17 @@ export class InboxComponent implements OnInit {
 
     this.events.getUserDataEvent.subscribe((user: any) => {
       let arr = []
+     if(user.tasks) {
       for (let i of user.tasks) {
-        console.log(i.isCompleted)
         i.fakeId = this.removeLeadingNumbers(i._id)
         arr.push(i)
       }
+     }
       this.tasks = arr.reverse()
     })
 
     this.events.addTaskEvent.subscribe((val) => {
       val.task.fakeId = this.removeLeadingNumbers(val.task._id)
-      console.log(val.task)
       this.tasks.unshift(val.task)
     })
 
@@ -56,11 +56,21 @@ export class InboxComponent implements OnInit {
       for(let task of this.tasks) {
         if(task._id == completed_task._id) {
           task.isCompleted = completed_task.isCompleted
-          console.log({'Inbox isCompleted': task.isCompleted})
           break
         }
       }
     })
+    
+    this.events.deleteTaskEvent.subscribe((deleted_task) => {
+      for(let i = 0; i < this.tasks.length; i++) {
+        let task = this.tasks[i]
+        if(task._id == deleted_task._id) {
+          this.tasks.splice(i, 1)
+          break
+        }
+      }
+    })
+  
   }
 
   public openTask = function (task) {

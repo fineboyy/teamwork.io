@@ -3,6 +3,7 @@ const passport = require('passport');
 
 const User = mongoose.model('User');
 const Task = mongoose.model('Task');
+const Department = mongoose.model('Department')
 
 
 
@@ -79,10 +80,14 @@ const createTask = function({body, payload}, res) {
     task.creatorId = body.creatorId
     task.title = body.title
     task.assignedTo = body.assignedTo
-    task.date = body.date
+    task.date_created = body.date_created
     task.content = body.content
     task.isCompleted = false
 
+    const department = new Department()
+    department.name = body.department
+
+    task.departments.push(department)
     let userId = payload._id
 
     User.findById(userId, (err, user) => { 
@@ -96,17 +101,35 @@ const createTask = function({body, payload}, res) {
     })
 }
 
-const resolveTask = function({payload, params}, res) {
+const resolveTask = function({body, payload, params}, res) {
     
     User.findOne({'_id': payload._id}).then(user => {
         let resolved_task = user.tasks.id(params.id)
         resolved_task['isCompleted'] = 'isCompleted'
         resolved_task['isCompleted'] = !resolved_task['isCompleted']
+        resolved_task.date_completed = body.date_completed
         user.save()
 
         return res.json(resolved_task)
     }).catch(err => {
         return res.json(err)
+    })
+}
+
+
+const deleteTask = function({params, payload}, res) {
+    let userId = payload._id
+    let taskId = params.id
+    User.findById(userId, (err, user) => {
+        if(!user){ return res.status(401).json({message: "The user was not found"})}
+        if(err) { return res.json(err)}
+
+        const task = user.tasks.id(taskId).remove()
+        console.log(task)
+        user.save((err) => {
+            if (err) { return res.send({ error: err }); }
+            return res.json(task)
+        })
     })
 }
 
@@ -116,4 +139,5 @@ module.exports = {
     getUserData,
     createTask,
     resolveTask,
+    deleteTask
 }
