@@ -66,6 +66,9 @@ export class InboxComponent implements OnInit {
         let task = this.tasks[i]
         if(task._id == deleted_task._id) {
           this.tasks.splice(i, 1)
+          if(this.tasks[i]) {
+            this.api.updateOpenTask(this.tasks[i])
+          }
           break
         }
       }
@@ -76,7 +79,6 @@ export class InboxComponent implements OnInit {
   public openTask = function (task) {
     this.api.updateOpenTask(task);
     this.document.querySelector('.add-task').classList.add('show')
-    this.document.querySelector('.inbox').classList.add('shorter')
   }
 
   public showForm() {

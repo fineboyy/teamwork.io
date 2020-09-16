@@ -15,7 +15,7 @@ export class MailDetailComponent implements OnInit {
     private events: EventEmitterService,
     private storage: LocalStorageService,
     private api: ApiService,
-    @Inject (DOCUMENT) private document: Document,
+    @Inject(DOCUMENT) private document: Document,
 
   ) { }
 
@@ -31,19 +31,19 @@ export class MailDetailComponent implements OnInit {
         this.content = task.content
         this.creatorName = task.creatorName
         this.creatorId = task.creatorId
-        if(task.departments.length) {
+        if (task.departments.length) {
           this.department = task.departments[0].name
 
-          if(this.department === 'Marketing') {
+          if (this.department === 'Marketing') {
             this.tagClass = 'marketing'
           }
-          if(this.department === 'Design') {
-            this.tagClass = 'design'
+          if (this.department === 'Design') {
+            this.tagClass = 'designn'
           }
-          if(this.department === 'Development') {
+          if (this.department === 'Development') {
             this.tagClass = 'development'
           }
-          if(this.department === 'Management') {
+          if (this.department === 'Management') {
             this.tagClass = 'management'
           }
         }
@@ -54,28 +54,23 @@ export class MailDetailComponent implements OnInit {
         console.log(task)
       }
     })
-  
+
     this.events.toggleCalendarEvent.subscribe((val) => {
-      if(val === 'clicked') {
+      if (val === 'clicked') {
         this.document.querySelector('.mail-detail').classList.toggle('hide')
       }
     })
-  
+
     this.events.showFormEvent.subscribe((val) => {
-      if(val === 'show') {
+      if (val === 'show') {
         this.show_form = true
         this.title = ''
       }
     })
-  
+
     this.events.resolveTaskEvent.subscribe((resolved_task) => {
       this.isCompleted = resolved_task.isCompleted
       this.date_completed = resolved_task.date_completed
-    })
-  
-    this.events.deleteTaskEvent.subscribe((deleted_task) => {
-      this.title = ''
-      this.show_form = true
     })
   }
 
@@ -102,7 +97,7 @@ export class MailDetailComponent implements OnInit {
   public newTaskContent: string = ''
 
 
-  
+
 
   private departments = [
     "Marketing",
@@ -137,7 +132,7 @@ export class MailDetailComponent implements OnInit {
     this.api.makeRequest(requestObject).then((val) => {
       if (val.message === 'Task Created') {
         this.newTaskTitle = '',
-        this.newTaskContent = ''
+          this.newTaskContent = ''
         this.events.addTaskEvent.emit(val)
       }
     })
@@ -155,8 +150,10 @@ export class MailDetailComponent implements OnInit {
     }
 
     this.api.makeRequest(requestObject).then((deleted_task) => {
-      if(deleted_task.title) {
+      if (deleted_task.title) {
         console.log(deleted_task)
+        this.title = ''
+        this.show_form = true
         this.events.deleteTaskEvent.emit(deleted_task)
       }
     })

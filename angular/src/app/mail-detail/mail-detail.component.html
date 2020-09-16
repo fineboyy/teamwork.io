@@ -6,7 +6,7 @@
   <div class="central">
     <h5>Click here to create a new task!</h5>
     <div class="add-icon" (click)="showForm()">
-      <i class="fa fa-pen"></i>
+      <i class="fas fa-pencil-alt"></i>
     </div>
   </div>
 </div>
@@ -20,8 +20,7 @@
 <div *ngIf="!title && show_form" class="mail-detail custom-scroll">
   <div class="mail-detail-header">
     <div class="mail-detail-profile">
-      <!-- <img src="https://assets.codepen.io/3364143/Screen+Shot+2020-08-01+at+12.24.16.png" alt="" -->
-      <img src="../../assets/images/profile-images/default-avatar.jpg" alt="" class="members inbox-detail" />
+      <img src="../../assets/images/profile-images/m15.jpg" alt="" class="members inbox-detail" />
       <div class="mail-detail-name">
         <!-- {{ creatorName }} -->
       </div>
@@ -60,7 +59,7 @@
       <label for="mail20"></label>
       <div class="mail-contents-title editable" data-text="Your title goes here..." contenteditable="true"
         name='newTaskTitle' ngDefaultControl [(ngModel)]='newTaskTitle'
-        (input)="newTaskTitle = $event.target.innerText">
+        (input)="newTaskTitle = $event.target.innerText" required>
       </div>
     </div>
     <div class="mail">
