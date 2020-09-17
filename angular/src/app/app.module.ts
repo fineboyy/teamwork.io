@@ -15,6 +15,9 @@ import { PageHomeComponent } from './page-home/page-home.component';
 import { PageAccessComponent } from './page-access/page-access.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PageSettingsComponent } from './page-settings/page-settings.component';
+import { SecondaryHeaderComponent } from './secondary-header/secondary-header.component';
+import { PageMessagesComponent } from './page-messages/page-messages.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { RegisterComponent } from './register/register.component';
     PageAccessComponent,
     LoginComponent,
     RegisterComponent,
+    PageSettingsComponent,
+    SecondaryHeaderComponent,
+    PageMessagesComponent,
 
   ],
   imports: [

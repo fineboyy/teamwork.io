@@ -24,7 +24,7 @@ export class PageAccessComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.title.setTitle("Task Manager - Sign Up")
+    this.title.setTitle("TeamWork.io - All your effiency in one place")
   }
   public formError = ""
 

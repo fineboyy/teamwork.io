@@ -4,6 +4,7 @@ import { AuthService } from './auth.service'
 
 import { PageHomeComponent } from './page-home/page-home.component';
 import { PageAccessComponent } from './page-access/page-access.component'
+import { PageSettingsComponent } from './page-settings/page-settings.component'
 
 
 const routes: Routes = [
@@ -21,6 +22,11 @@ const routes: Routes = [
     path: "home",
     component: PageHomeComponent,
     canActivate: [AuthService],
+    data: {loggedIn: true}
+  },
+  {
+    path: "settings",
+    component: PageSettingsComponent,
     data: {loggedIn: true}
   }
 ];
