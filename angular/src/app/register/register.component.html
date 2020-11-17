@@ -4,7 +4,8 @@
         <h1>TASK MANAGER</h1>
         <p>Quote of the Day:</p>
         <p><i>"If you want to go fast, go alone. If you want to go far, go together."</i></p>
-        <a (click)="toggleLogin()">Log In</a>
+        <!-- <a (click)="toggleLogin()">Log In</a> -->
+        <h2 (click)="toggleLogin()">Log In</h2>
     </div>
     <div class="form-pane">
         <form class="access-form" action="/users/login" method="post" (submit)="formSubmit()" autocomplete="off">
