@@ -8,7 +8,7 @@ var logger = require('morgan');
 const passport = require('passport');
 require('./mvc/models/db');
 
-var indexRouter = require('./mvc/routes/index');
+// var indexRouter = require('./mvc/routes/index');
 var usersRouter = require('./mvc/routes/users');
 
 var app = express();
@@ -32,9 +32,8 @@ app.use('/', (req, res, next) => {
   next();
 });
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
 app.get("*", function(req, res, next) {
   res.sendFile(path.join(__dirname, 'angular', 'build', 'index.html'))
 })
