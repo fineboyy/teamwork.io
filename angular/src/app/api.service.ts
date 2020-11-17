@@ -52,19 +52,6 @@ export class ApiService {
 
     console.log("Could not make the request. Make sure a method of GET or POST is supplied");
   }
-
-  public updateOpenTask(task) {
-    this.events.updateOpenTaskEvent.emit(task)
-  }
-
-  public showForm() {
-    this.events.showFormEvent.emit('show')
-  }
-
-  public toggleCalendar() {
-    this.events.toggleCalendarEvent.emit('clicked')
-  }
-
   public getUserData(id) {
     let requestObject = {
       method: 'GET',
@@ -81,51 +68,6 @@ export class ApiService {
     })
   }
 
-  public getTaskDate() {
-
-    let monthsArr = [
-      "Jan.",
-      "Feb.",
-      "Mar.",
-      "Apr.",
-      "May.",
-      "Jun.",
-      "Jul.",
-      "Aug.",
-      "Sept.",
-      "Oct.",
-      "Nov.",
-      "Dec."
-    ]
-
-
-    let daysArr = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ]
-
-    let d = new Date()
-  
-    let weekday = daysArr[d.getDay()]
-    let day = d.getDate()
-    let month = monthsArr[d.getMonth()]
-    let year = d.getFullYear()
-
-    let hours = d.getHours()
-    let minutes = d.getMinutes().toString()
-    if(minutes.length == 1) {
-      minutes = "0" + minutes
-    }
-
-    let dateString = `${weekday}, ${day} ${month} ${year} at ${hours}:${minutes}`
-    return dateString
-  }
-
   public resolveTask(id) {
     let requestObj = {
       method: 'POST',
@@ -139,5 +81,25 @@ export class ApiService {
     this.makeRequest(requestObj).then((completed_task) => {
       this.events.resolveTaskEvent.emit(completed_task);
     })
+  }
+
+
+  //Miscellaneous Services. Shouldn't necessarily be in the API Service
+
+  public updateOpenTask(task) {
+    this.events.updateOpenTaskEvent.emit(task)
+  }
+
+  public showForm() {
+    this.events.showFormEvent.emit('show')
+  }
+
+  public toggleCalendar() {
+    this.events.toggleCalendarEvent.emit('clicked')
+  }
+
+  public getTaskDate() {
+    let date = new Date()
+    return date
   }
 }

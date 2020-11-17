@@ -24,16 +24,28 @@ export class MailDetailComponent implements OnInit {
       if (task.title) {
         this.show_form = false
 
+        this.username = this.storage.getParsedToken().name
+
         this.title = task.title
         this.date_created = task.date_created
         this.date_completed = task.date_completed
         this.assignedTo = task.assignedTo
         this.content = task.content
-        this.creatorName = task.creatorName
+
+        if(task.creatorName == this.username ) {
+          this.creatorName = 'You'
+          this.creatorNameForHeader = this.username
+        } else {
+          this.creatorName = task.creatorName
+          this.creatorNameForHeader = this.creatorName
+        }
+
         this.creatorId = task.creatorId
         if (task.departments.length) {
           this.department = task.departments[0].name
 
+
+          //To be scrapped or refactored
           if (this.department === 'Marketing') {
             this.tagClass = 'marketing'
           }
@@ -51,7 +63,7 @@ export class MailDetailComponent implements OnInit {
         this.isCompleted = task.isCompleted
         this.taskId = task._id
       } else {
-        console.log(task)
+        return
       }
     })
 
@@ -78,19 +90,23 @@ export class MailDetailComponent implements OnInit {
   public showForm() {
     this.api.showForm()
   }
+  //Nme of logged in user
+  public username: string = ''
 
-
+  //Task Variables
   public taskId = ''
   public title = ''
   public date_created = ''
   public date_completed = ''
   public assignedTo = ''
+  public creatorNameForHeader: string = ''
   public creatorName = ''
   public creatorId = ''
   public content = ''
   public isCompleted: boolean
   public department: string = ''
   public tagClass: string = ''
+  
 
   //Variables for a newly created task
   public newTaskTitle: string = ''
@@ -107,16 +123,13 @@ export class MailDetailComponent implements OnInit {
   ]
 
   public addTask = function () {
-    console.log(this.newTaskTitle)
-    console.log(this.newTaskContent)
-
     let taskBody = {
       creatorName: this.storage.getParsedToken().name,
+      // creatorName: 'Daniel Bempong',
       creatorId: this.storage.getParsedToken()._id,
       assignedTo: 'No one',
       title: this.newTaskTitle || 'No Title',
       content: this.newTaskContent || 'No Content',
-      // content: `Yeah I know you would love to see a lot of text here, but I just cannot give you that. What I can give you right now is what I am giving you. If you like it, that's great because I like it too. But if you don't, well, you can go burn the sea!`,
       date_created: this.api.getTaskDate(),
       department: this.departments[Math.floor(Math.random() * 4)]
     }
@@ -151,9 +164,8 @@ export class MailDetailComponent implements OnInit {
 
     this.api.makeRequest(requestObject).then((deleted_task) => {
       if (deleted_task.title) {
-        console.log(deleted_task)
         this.title = ''
-        this.show_form = true
+        this.show_form = false
         this.events.deleteTaskEvent.emit(deleted_task)
       }
     })

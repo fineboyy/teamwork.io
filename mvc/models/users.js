@@ -30,7 +30,20 @@ const userSchema = new mongoose.Schema({
     password: String,
     email: String,
     tasks: [taskSchema],
+    teams: [String],
 })
+
+const teamSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    creatorId: String,
+    members: [String],
+    tasks: [String],
+})
+
+
 
 userSchema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(64).toString('hex');
@@ -53,3 +66,4 @@ userSchema.methods.getJwt = function () {
 mongoose.model('User', userSchema)
 mongoose.model('Task', taskSchema)
 mongoose.model('Department', departmentSchema)
+mongoose.model('Team', teamSchema)

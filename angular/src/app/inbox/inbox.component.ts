@@ -66,15 +66,20 @@ export class InboxComponent implements OnInit {
         let task = this.tasks[i]
         if(task._id == deleted_task._id) {
           this.tasks.splice(i, 1)
-          if(this.tasks[i]) {
-            this.api.updateOpenTask(this.tasks[i])
-          }
+          // if(this.tasks[i]) {
+          //   this.api.updateOpenTask(this.tasks[i])
+          // }
           break
         }
       }
     })
   
+    this.events.searchTaskEvent.subscribe((data) => {
+      this.search_term = data
+    })
   }
+
+  public search_term = ''
 
   public openTask = function (task) {
     this.api.updateOpenTask(task);

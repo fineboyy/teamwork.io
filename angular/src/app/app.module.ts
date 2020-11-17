@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { PageSettingsComponent } from './page-settings/page-settings.component';
 import { SecondaryHeaderComponent } from './secondary-header/secondary-header.component';
 import { PageMessagesComponent } from './page-messages/page-messages.component';
+import { FilterTasksPipe } from './filter-tasks.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PageMessagesComponent } from './page-messages/page-messages.component';
     PageSettingsComponent,
     SecondaryHeaderComponent,
     PageMessagesComponent,
+    FilterTasksPipe,
 
   ],
   imports: [

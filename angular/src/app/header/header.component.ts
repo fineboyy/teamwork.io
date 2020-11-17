@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ApiService } from '../api.service'
 import { LocalStorageService } from '../local-storage.service'
 import { AuthService } from '../auth.service'
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'app-header',
@@ -14,16 +15,23 @@ export class HeaderComponent implements OnInit {
     private api: ApiService,
     private storage: LocalStorageService,
     public auth: AuthService,
+    public events: EventEmitterService,
   ) { }
 
   ngOnInit(): void {
     let userid = this.storage.getParsedToken()._id
-    this.api.getUserData(userid)
   }
+
+  public searchTerm: string = ''
 
   public toggleCalendar() {
     this.api.toggleCalendar()
   }
+
+  public searchForTask() {
+    this.events.searchTaskEvent.emit(this.searchTerm)
+  }
+  
 
   public show_options: boolean = false
   public showOptions() {

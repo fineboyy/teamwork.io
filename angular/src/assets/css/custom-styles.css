@@ -10,18 +10,6 @@ body {
 /* USER PROFILE AREA */
 /* ======================================= */
 
-.user-profile-area {
-  justify-content: space-between;
-}
-
-.side-wrapper:nth-of-type(3) {
-  /* max-height: 18vh; */
-  overflow: auto;
-  flex-grow: 1;
-  /* padding-top: 15px; */
-}
-
-
 
 
 
@@ -111,7 +99,7 @@ body {
   height: 100%;
 
 
-  overflow: auto;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
@@ -124,57 +112,12 @@ body {
   overflow: auto;
 }
 
+.msg:hover {
+  background-color: white;
+  cursor: pointer;
+}
 
 /* MAIL DETAIL */
-.mail-detail {
-  max-height: 100%;
-  height: 100%;
-}
-
-.department-tags {
-  margin-top: 5px;
-}
-
-.task-tag {
-  margin-left: 3px;
-  border-radius: 3px;
-  padding: 3px 5px;
-}
-.marketing { background-color: rgb(255, 191, 255); }
-.designn { background-color: rgb(183, 128, 247); color: white;}
-.management { background-color: rgb(255, 117, 117); color: white;}
-.development { background-color: rgb(255, 213, 97); }
-
-
-.editable {
-  background-color: #EAEEFC;
-  padding: 5px 5px 1px 5px;
-  margin-left: 0;
-  border-radius: 5px;
-
-  cursor: text;
-}
-
-.editable:nth-of-type(2) {
-  margin-top: 70px;
-  padding-top: 5px;
-  padding-bottom: 150px;
-
-}
-
-.mail-inside {
-  overflow-wrap: anywhere;
-}
-
-
-
-
-
-
-
-.editable:empty::before{
-  content:attr(data-text)
-}
 
 
 

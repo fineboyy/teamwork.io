@@ -10,16 +10,16 @@
     </div>
 
     <div class="inbox-content custom-scroll">
-      <div *ngFor="let task of tasks" class="msg anim-y" [ngClass]="{'activated' : task.selected == true }"
-        (click)="openTask(task)">
+      <div *ngFor="let task of tasks | filterTasks: search_term " class="msg anim-y" [ngClass]="{'activated' : task.selected == true }"
+        (click)="openTask(task)" >
         <input type="checkbox" name="msg" id="{{ task.fakeId }}" class="mail-choice" [(ngModel)]="task.isCompleted"
           [attr.checked]=" task.isCompleted == true ? 'checked' : null " (change)='resolveTask(task._id)'>
         <label for="{{ task.fakeId }}"></label>
         <div class="msg-content">
           <div class="msg-title"> {{ task.title }}</div>
-          <div class="msg-date"> {{ task.date_created }} </div>
+          <div class="msg-date"> {{ task.date_created | date }} </div>
         </div>
-        <img src="../../assets/images/profile-images/m15.jpg" alt="" class="members mail-members">
+        <img src="../../assets/images/profile-images/f16.jpg" alt="" class="members mail-members">
       </div>
     </div>
 

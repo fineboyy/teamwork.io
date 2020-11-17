@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
+const teams = require('./teams');
 
 const User = mongoose.model('User');
 const Task = mongoose.model('Task');
 const Department = mongoose.model('Department')
+const Team = mongoose.model('Team')
+
+
+// HELPER FUNCTIONS
+// =========================================================
+
+
 
 
 
@@ -61,12 +69,26 @@ const loginUser = function(req, res) {
 
 //==========================================================================
 const getUserData = function({params}, res) {
-    console.log(params.id)
     User.findById(params.id, "-salt -password", {lean: true}, (err, user) => {
         if(err) { return res.json(err) }
         if(!user) {return res.json({message: 'The user you\'re looking for does not exist'})}
 
-        return res.json(user)
+
+        let promise = new Promise(function(resolve, reject) {
+            Team.find({"_id": {$in: user.teams} }, "name", {lean: true}, (err, teams) => {
+                if(err) { reject("Error", err); return res.json(err)}
+                resolve(teams)
+            })
+        })
+
+        promise.then((teams) => {
+            user.teams = teams
+            return res.json(user)
+        })
+        .catch((err) => {
+            console.log({"Error": err})
+            return res.json(err)
+        })
     })
 }
 
@@ -125,7 +147,6 @@ const deleteTask = function({params, payload}, res) {
         if(err) { return res.json(err)}
 
         const task = user.tasks.id(taskId).remove()
-        console.log(task)
         user.save((err) => {
             if (err) { return res.send({ error: err }); }
             return res.json(task)

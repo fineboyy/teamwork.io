@@ -20,7 +20,7 @@
 <div *ngIf="!title && show_form" class="mail-detail custom-scroll">
   <div class="mail-detail-header">
     <div class="mail-detail-profile">
-      <img src="../../assets/images/profile-images/m15.jpg" alt="" class="members inbox-detail" />
+      <img src="../../assets/images/profile-images/f16.jpg" alt="" class="members inbox-detail" />
       <div class="mail-detail-name">
         <!-- {{ creatorName }} -->
       </div>
@@ -57,7 +57,7 @@
     <div class="mail-contents-subject">
       <input type="checkbox" name="msg" id="mail20" class="mail-choice" unchecked>
       <label for="mail20"></label>
-      <div class="mail-contents-title editable" data-text="Your title goes here..." contenteditable="true"
+      <div class="mail-contents-title editable" data-text="Your Title Goes Here..." contenteditable="true"
         name='newTaskTitle' ngDefaultControl [(ngModel)]='newTaskTitle'
         (input)="newTaskTitle = $event.target.innerText" required>
       </div>
@@ -142,8 +142,8 @@
 <div *ngIf="title && !show_form" class="mail-detail custom-scroll">
   <div class="mail-detail-header">
     <div class="mail-detail-profile">
-      <img src="../../assets/images/profile-images/m15.jpg" alt="" class="members inbox-detail" />
-      <div class="mail-detail-name">{{ creatorName }}</div>
+      <img src="../../assets/images/profile-images/f16.jpg" alt="" class="members inbox-detail" />
+      <div class="mail-detail-name">{{ username }}</div>
     </div>
     <div class="mail-icons">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -187,7 +187,7 @@
           class="feather feather-clock">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" /></svg>
-        {{ date_created }}
+        {{ date_created | date: 'medium' }}
       </div>
       <span class="department-tags" *ngIf="department">
         <i class="fas fa-tag">
@@ -198,22 +198,22 @@
       <div class="mail-assign">
         <div class="assignee">
           <strong>{{ creatorName }}</strong> assigned to {{ assignedTo }}.
-          <span class="assign-date">25 Nov, 2019</span>
+          <span class="assign-date">{{ date_created | date }}</span>
         </div>
         <div class="assignee">
           <strong>{{ creatorName }}</strong> added to Marketing.
-          <span class="assign-date">18 Feb, 2019</span>
+          <span class="assign-date">{{ date_created | date }}</span>
         </div>
         <div class="assignee">
           <strong>{{ creatorName }} </strong> created task.
-          <span class="assign-date">{{ date_created }}</span>
+          <span class="assign-date">{{ date_created | date }}</span>
         </div>
       </div>
       <div class="mail-checklist" *ngIf="isCompleted">
         <input type="checkbox" name="msg" id="mail30" class="mail-choice" [(ngModel)]="isCompleted"
           [attr.checked]=" isCompleted == true ? 'checked' : null " (change)="resolveTask(taskId)">
         <label for="mail30"> You completed this task.</label>
-        <div class="mail-checklist-date">{{ date_completed }}</div>
+        <div class="mail-checklist-date">{{ date_completed | date: 'short' }}</div>
       </div>
       <div class="mail-doc">
         <div class="mail-doc-wrapper">

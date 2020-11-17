@@ -11,6 +11,8 @@ export class EventEmitterService {
   showFormEvent: EventEmitter<any> = new EventEmitter();
   resolveTaskEvent: EventEmitter<any> = new EventEmitter();
   deleteTaskEvent: EventEmitter<any> = new EventEmitter();
+  createTaskEvent: EventEmitter<any> = new EventEmitter();
+  searchTaskEvent: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 }

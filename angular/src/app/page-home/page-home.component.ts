@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser'
+import { ApiService } from '../api.service'
+import { LocalStorageService } from '../local-storage.service'
 
 @Component({
   selector: 'app-page-home',
@@ -10,6 +12,8 @@ export class PageHomeComponent implements OnInit {
 
   constructor(
     private title: Title,
+    private api: ApiService,
+    private storage: LocalStorageService,
   ) { }
 
   ngOnInit(): void {
