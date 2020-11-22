@@ -3,6 +3,7 @@ import { ApiService } from '../api.service'
 import { LocalStorageService } from '../local-storage.service'
 import { AuthService } from '../auth.service'
 import { EventEmitterService } from '../event-emitter.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -20,16 +21,24 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     let userid = this.storage.getParsedToken()._id
+
+    this.search_form = new FormGroup({
+      'search_item' : new FormControl(null, Validators.required)
+    })
+
+    this.search_form.get('search_item').valueChanges.subscribe((value) => {
+      this.searchForTask(value)
+    })
   }
 
-  public searchTerm: string = ''
+  search_form: FormGroup
 
   public toggleCalendar() {
     this.api.toggleCalendar()
   }
 
-  public searchForTask() {
-    this.events.searchTaskEvent.emit(this.searchTerm)
+  public searchForTask(keyword) {
+    this.events.searchTaskEvent.emit(keyword)
   }
   
 

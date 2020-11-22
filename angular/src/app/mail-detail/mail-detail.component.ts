@@ -129,7 +129,7 @@ export class MailDetailComponent implements OnInit {
       creatorId: this.storage.getParsedToken()._id,
       assignedTo: 'No one',
       title: this.newTaskTitle || 'No Title',
-      content: this.newTaskContent || 'No Content',
+      content: this.newTaskContent || 'Lorem ipsum dolor amet dine fate silum manor telgris aminut semi nade lemo liricus dometis therim alacora senti necod andemadke dolor amet dine fate silum manor telgris aminut semi nade lemo liricus dometis therim alacora dolor amet dine fate silum manor telgris aminut semi nade lemo liricus dometis therim alacora malaki senti dadee.',
       date_created: this.api.getTaskDate(),
       department: this.departments[Math.floor(Math.random() * 4)]
     }
@@ -146,6 +146,7 @@ export class MailDetailComponent implements OnInit {
       if (val.message === 'Task Created') {
         this.newTaskTitle = '',
           this.newTaskContent = ''
+          this.show_form = false
         this.events.addTaskEvent.emit(val)
       }
     })

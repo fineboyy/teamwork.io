@@ -11,7 +11,10 @@ export class FilterTasksPipe implements PipeTransform {
 
     const resultsArray = []
     for (let i = 0; i < value.length; i++) {
-      if(value[i].title === filterString) {
+      // if(value[i].title.toLowerCase() === filterString.toLowerCase()) {
+      //   resultsArray.push(value[i])
+      // }
+      if(value[i].title.toLowerCase().includes(filterString.toLowerCase())) {
         resultsArray.push(value[i])
       }
     }
