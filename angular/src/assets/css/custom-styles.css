@@ -112,10 +112,10 @@ body {
   overflow: auto;
 }
 
-.msg:hover {
+/* .msg:hover {
   background-color: white;
   cursor: pointer;
-}
+} */
 
 /* MAIL DETAIL */
 
@@ -177,13 +177,13 @@ body {
 
 /* For custom scroll bars */
 .custom-scroll::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
 }
 .custom-scroll::-webkit-scrollbar-track { background: #F8F9FC; }
 .custom-scroll::-webkit-scrollbar-thumb { 
   background: var(--calendar-border-color);
-  border-radius: 4px;
+  border-radius: 5px;
 }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: var(--button-color) }
 
