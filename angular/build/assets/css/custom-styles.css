@@ -1,0 +1,190 @@
+body {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+}
+
+/* USER PROFILE AREA */
+/* ======================================= */
+
+
+
+
+
+
+
+/* MAIN AREA */
+/* ============================================== */
+
+
+/* HEADER */
+
+.header {
+  justify-content: space-around;
+}
+
+.activated {
+  background-color: var(--theme-bg-color);
+}
+
+.fa-bars {
+  color: var(--button-color);
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.options-button {
+  position: relative;
+}
+
+.options-menu {
+  position: absolute;
+  top: 28px;
+  left: -60px;
+  width: 110px;
+  z-index: 10;
+
+  padding: 10px 0;
+
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+
+  background-color: white;
+}
+
+.options-menu * {
+  margin: 0;
+}
+
+.options-menu ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.options-menu li {
+  list-style: none;
+  margin: 2px 0;
+  padding: 3px 0;
+  font-size: 13px;
+  color: var(--main-color);
+
+  padding-left: 17px;
+  cursor: pointer;
+}
+
+.options-menu li:hover {
+  color: white;
+  background-color: var(--button-color);
+}
+
+/* INBOX */
+
+.inbox-container {
+  max-height: 100%;
+  height: 100%;
+}
+
+.inbox {
+
+  max-height: 100%;
+  height: 100%;
+
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inbox-content {
+  flex-grow: 1;
+
+  overflow: auto;
+}
+
+/* .msg:hover {
+  background-color: white;
+  cursor: pointer;
+} */
+
+/* MAIL DETAIL */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================ */
+
+
+/* CALENDAR */
+
+.calendar-container {
+  width: 95%;
+  height: 95%;
+}
+
+
+/* ================ */
+
+/* .msg {
+  background-color: var(--unselected-mail);
+}
+
+.msg-department {
+  background-color: var(--theme-bg-color);
+} */
+
+
+
+
+
+
+/* ================================================== */
+
+
+/* For custom scroll bars */
+.custom-scroll::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+.custom-scroll::-webkit-scrollbar-track { background: #F8F9FC; }
+.custom-scroll::-webkit-scrollbar-thumb { 
+  background: var(--calendar-border-color);
+  border-radius: 5px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: var(--button-color) }
+
+/*# sourceMappingURL=custom-styles.css.map */
